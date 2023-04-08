@@ -5,7 +5,7 @@ downgrade tethered checkm8 idevices ios 14, 15.
 
 download the ipsw and put it into ipsw/ directory
 
-Example: ./downr1n.sh --downgrade 14.3 
+Example: sudo python3 downr1n.py
 
    
     --downgrade         downgrade tethered your device to ios 14.
@@ -58,7 +58,8 @@ sometimes we have problems like deep sleep or the ios doesnt boot so i add two o
 <details><summary>thanks to</summary>
 <p>
 
-- [Edwin](https://github.com/edwin170) owner :)
+- [Aditya] (https://github.com/aditya20110) developer,owner :)
+- [Edwin](https://github.com/edwin170) developer of downr1n :)
  
 </details>
 
