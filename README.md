@@ -59,6 +59,7 @@ sometimes we have problems like deep sleep or the ios doesnt boot so i add two o
 <p>
 
 - [Aditya](https://github.com/aditya20110) developer,owner :)
+- [Uckermark](https://github.com/Uckermark) fixed most of the errors we faced.Thank you :)
 - [Edwin](https://github.com/edwin170) developer of downr1n :)
  
 </details>
