@@ -1,0 +1,5 @@
+requests
+remotezip
+pyimg4
+PyQt5
+applescript
