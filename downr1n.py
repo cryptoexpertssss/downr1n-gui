@@ -1,6 +1,7 @@
 import cmd
 import os
 import sys
+import platform
 
 
 try:
@@ -15,6 +16,12 @@ except ImportError:
             print("Error automatically installing requirements, please install them manually.")
             quit()
     print("Please restart downr1n-gui")
+
+def run_command(command):
+    if platform.system() == "Darwin":
+        tell.app('Terminal', 'do script "' + command + '"')
+    else:
+        os.system(command)
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -57,7 +64,7 @@ class MainWindow(QMainWindow):
 
             QMessageBox.critical(self, "Warning!", "Connect your device already in DFU mode with sigchecks removed before proceeding")
 
-            tell.app( 'Terminal', 'do script "' + command + '"') 
+            run_command(command)
 
 
         elif self.ui.BootMode.isChecked():
@@ -88,7 +95,7 @@ class MainWindow(QMainWindow):
             
             QMessageBox.critical(self, "Warning!", "After this script finishes, put your device into pwndfu with sigchecks removed again and run \"boot.sh\"")
 
-            tell.app( 'Terminal', 'do script "' + command + '"') 
+            run_command(command)
         
 
     def IPSWPath_clicked(self):
