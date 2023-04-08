@@ -53,12 +53,12 @@ sometimes we have problems like deep sleep or the ios doesnt boot so i add two o
 
 # Credits
 
-# with love Edwin :)
+# with love Aditya,Edwin :)
 
 <details><summary>thanks to</summary>
 <p>
 
-- [Aditya] (https://github.com/aditya20110) developer,owner :)
+- [Aditya](https://github.com/aditya20110) developer,owner :)
 - [Edwin](https://github.com/edwin170) developer of downr1n :)
  
 </details>
