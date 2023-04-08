@@ -28,9 +28,9 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-
         self.ui.StartButton.clicked.connect(self.StartButton_clicked)
         self.ui.IPSWButton.clicked.connect(self.IPSWPath_clicked)
+        self.path = os.path.dirname(os.path.abspath(__file__))
     
     def StartButton_clicked(self):
         ipsw = self.ui.IPSWLineEdit.text()
@@ -44,7 +44,6 @@ class MainWindow(QMainWindow):
                 QMessageBox.critical(self, "Error!", "No BoardConfig specified.")
                 return
 
-
             file_exists = os.path.exists(ipsw)
             if not file_exists:
                 QMessageBox.critical(self, "Error!", "The specified IPSW file does not exist.")
@@ -52,15 +51,15 @@ class MainWindow(QMainWindow):
             if not ipsw.endswith(".ipsw"):
                 QMessageBox.warning(self, "Warning!", "Your IPSW file is not a file ending in .ipsw\nThis can cause errors in the execution and it is recommended to choose a file ending in .ipsw")
 
-            args = f"--downgrade"
+            args = f"--downgrade 15.6"
             
             path = os.path.abspath(os.getcwd())
 
-            if not os.path.exists(f"{os.path.dirname(os.path.abspath(__file__))}/"):
+            if not os.path.exists(f"{self.path}/downr1n.sh"):
                 QMessageBox.critical(self, "Error!", "downr1n was not found in current path.")
                 return
 
-            command = f"cd {os.path.dirname(os.path.abspath(__file__))} && {sys.executable} {path}/downr1n.sh {args}"
+            command = f"cd {self.path} && {sys.executable} {path}/downr1n.sh {args}"
 
             QMessageBox.critical(self, "Warning!", "Connect your device already in DFU mode with sigchecks removed before proceeding")
 
@@ -74,7 +73,6 @@ class MainWindow(QMainWindow):
                 QMessageBox.critical(self, "Error!", "No IPSW file specified")
                 return
 
-
             file_exists = os.path.exists(ipsw)
             if not file_exists:
                 QMessageBox.critical(self, "Error!", "The specified IPSW file does not exist.")
@@ -82,14 +80,11 @@ class MainWindow(QMainWindow):
             if not ipsw.endswith(".ipsw"):
                 QMessageBox.warning(self, "Warning!", "Your IPSW file is not a file ending in .ipsw\nThis can cause errors in the execution and it is recommended to choose a file ending in .ipsw")
 
+            args = f"--downgrade 15.6"
 
-          
+            command = f"cd {self.path} && {sys.executable} {os.path.abspath(os.getcwd())}/downr1n.sh {args}"
 
-            args = f"--downgrade"
-
-            command = f"cd {os.path.dirname(os.path.abspath(__file__))} && {sys.executable} {os.path.abspath(os.getcwd())}/downr1n.sh {args}"
-
-            if not os.path.exists(f"{os.path.dirname(os.path.abspath(__file__))}/downr1n.sh"):
+            if not os.path.exists(f"{self.path}/downr1n.sh"):
                 QMessageBox.critical(self, "Error!", "dualra1n-gui was not found in current path.")
                 return
             
