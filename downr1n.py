@@ -2,6 +2,8 @@ import cmd
 import os
 import sys
 
+
+try:
     from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
     from gui import Ui_MainWindow
     from applescript import tell
@@ -12,16 +14,17 @@ except ImportError:
         except Exception:
             print("Error automatically installing requirements, please install them manually.")
             quit()
-        
-        print("Please restart downr1n-gui")
-    
-        dep = dependencies()
-        #dep = None
-        #QMessageBox.critical(self, "Error!", f"Dependency check stopped")
-        if dep != None:
-            QMessageBox.critical(self, "Error!", f"{dep} not found, please install it.")
-            quit()
+    print("Please restart downr1n-gui")
 
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super(MainWindow, self).__init__()
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
+
+        self.ui.StartButton.clicked.connect(self.StartButton_clicked)
+        self.ui.IPSWButton.clicked.connect(self.IPSWPath_clicked)
+    
     def StartButton_clicked(self):
         ipsw = self.ui.IPSWLineEdit.text()
         boardconfig = self.ui.BoardConfigLineEdit.text().lower()
@@ -94,12 +97,9 @@ except ImportError:
         if fileName:
             self.ui.IPSWLineEdit.setText(fileName)
 
-def main_gui():
-    app = QApplication(sys.argv)
 
-    sys.exit(app.exec())
-    
-if __name__ == '__main__':
-    #print("Downr1n")
-    #print("Made by Edwin,Aditya")
-    main_gui()
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    sys.exit(app.exec_())
