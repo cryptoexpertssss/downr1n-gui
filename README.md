@@ -27,7 +27,7 @@ sudo python3 jailbreak-gui.py
    - irecovery -n
 
 
-# help with something join to discord server https://discord.gg/GttagGBV
+# help with something join to discord server https://discord.gg/AjEHs5ug
 
 
 # Credits
