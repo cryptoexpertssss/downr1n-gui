@@ -63,7 +63,6 @@ class MainWindow(QMainWindow):
 
 
         elif self.ui.BootMode.isChecked():
-            identifier = self.ui.IdentifierLineEdit.text()
 
             if ipsw == "":
                 QMessageBox.critical(self, "Error!", "No IPSW file specified")
