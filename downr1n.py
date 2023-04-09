@@ -34,16 +34,12 @@ class MainWindow(QMainWindow):
     
     def StartButton_clicked(self):
         ipsw = self.ui.IPSWLineEdit.text()
-        boardconfig = self.ui.BoardConfigLineEdit.text().lower()
         
         if self.ui.RestoreMode.isChecked():
             if ipsw == "":
                 QMessageBox.critical(self, "Error!", "No IPSW file specified")
                 return
-            elif boardconfig == "":
-                QMessageBox.critical(self, "Error!", "No BoardConfig specified.")
-                return
-
+            
             file_exists = os.path.exists(ipsw)
             if not file_exists:
                 QMessageBox.critical(self, "Error!", "The specified IPSW file does not exist.")
@@ -51,7 +47,7 @@ class MainWindow(QMainWindow):
             if not ipsw.endswith(".ipsw"):
                 QMessageBox.warning(self, "Warning!", "Your IPSW file is not a file ending in .ipsw\nThis can cause errors in the execution and it is recommended to choose a file ending in .ipsw")
 
-            args = f"--downgrade 15.6"
+            args = f"sudo ./downr1n.sh --downgrade 15.6"
             
             path = os.path.abspath(os.getcwd())
 
@@ -80,7 +76,7 @@ class MainWindow(QMainWindow):
             if not ipsw.endswith(".ipsw"):
                 QMessageBox.warning(self, "Warning!", "Your IPSW file is not a file ending in .ipsw\nThis can cause errors in the execution and it is recommended to choose a file ending in .ipsw")
 
-            args = f"--downgrade 15.6"
+            args = f"sudo ./downr1n.sh --downgrade 15.6"
 
             command = f"cd {self.path} && {sys.executable} {os.path.abspath(os.getcwd())}/downr1n.sh {args}"
 
@@ -91,7 +87,6 @@ class MainWindow(QMainWindow):
             QMessageBox.critical(self, "Warning!", "After this script finishes, put your device into pwndfu with sigchecks removed again and run \"boot.sh\"")
 
             run_command(command)
-        
 
     def IPSWPath_clicked(self):
         options = QFileDialog.Options()
