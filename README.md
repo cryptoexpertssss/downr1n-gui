@@ -1,5 +1,5 @@
 # downr1n
-downgrade tethered checkm8 idevices ios 14, 15.
+A GUI Software that downgrades tethered checkm8 idevices ios 14, 15.
 
 # Usage
 
@@ -53,7 +53,7 @@ sometimes we have problems like deep sleep or the ios doesnt boot so i add two o
 
 # Credits
 
-# with love Aditya,Edwin :)
+# with love Aditya,Uckermark :)
 
 <details><summary>thanks to</summary>
 <p>
