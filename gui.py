@@ -69,7 +69,7 @@ class Ui_MainWindow(object):
         self.IPSWButton.clicked.connect(MainWindow.IPSWPath_clicked) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         MainWindow.setTabOrder(self.IPSWLineEdit, self.IPSWButton)
-        MainWindow.setTabOrder(self.RestoreMode)
+        MainWindow.setTabOrder(self.RestoreMode, self.BootMode)
         MainWindow.setTabOrder(self.RestoreMode, self.BootMode)
         MainWindow.setTabOrder(self.BootMode, self.StartButton)
 
