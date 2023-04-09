@@ -76,7 +76,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "downr1n - GUI"))
-        self.IPSWButton.setText(_translate("MainWindow", "...")))
+        self.IPSWButton.setText(_translate("MainWindow", "..."))
         self.IPSWLabel.setText(_translate("MainWindow", "IPSW Path"))
         self.StartButton.setText(_translate("MainWindow", "Start!"))
         self.BootMode.setText(_translate("MainWindow", "Boot"))
