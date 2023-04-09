@@ -2,6 +2,7 @@ import cmd
 import os
 import sys
 import platform
+import threading
 
 
 try:
@@ -17,11 +18,19 @@ except ImportError:
             quit()
     print("Please restart downr1n-gui")
 
-def run_command(command):
-    if platform.system() == "Darwin":
-        tell.app('Terminal', 'do script "' + command + '"')
-    else:
-        os.system(command)
+class CommandRunner(threading.Thread):
+    def __init__(self):
+        super().__init__()
+        self.command = None
+
+    def set_command(self, command):
+        self.command = command
+
+    def start(self):
+        if platform.system() == "Darwin":
+            tell.app('Terminal', 'do script "' + self.command + '"')
+        else:
+            log = os.system(self.command)
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -30,9 +39,14 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
         self.ui.StartButton.clicked.connect(self.StartButton_clicked)
         self.ui.IPSWButton.clicked.connect(self.IPSWPath_clicked)
-        self.path = os.path.dirname(os.path.abspath(__file__))
+        self.path = os.path.abspath(os.getcwd())
+        self.command_thread = CommandRunner()
     
     def StartButton_clicked(self):
+        if self.command_thread and self.command_thread.is_alive():
+            QMessageBox.critical(self, "Error!", "A command is already running. Please wait for it to finish.")
+            return
+
         ipsw = self.ui.IPSWLineEdit.text()
         
         if self.ui.RestoreMode.isChecked():
@@ -55,35 +69,26 @@ class MainWindow(QMainWindow):
                 QMessageBox.critical(self, "Error!", "downr1n was not found in current path.")
                 return
 
-            command = f"cd {self.path} && {sys.executable} {path}/downr1n.sh {args}"
+            command = f"{path}/downr1n.sh {args}"
 
             QMessageBox.critical(self, "Warning!", "Connect your device already in DFU mode with sigchecks removed before proceeding")
 
-            run_command(command)
+            self.command_thread.set_command(command)
+            self.command_thread.start()
 
 
         elif self.ui.BootMode.isChecked():
 
-            if ipsw == "":
-                QMessageBox.critical(self, "Error!", "No IPSW file specified")
-                return
+            args = "--boot"
 
-            file_exists = os.path.exists(ipsw)
-            if not file_exists:
-                QMessageBox.critical(self, "Error!", "The specified IPSW file does not exist.")
-                return
-            if not ipsw.endswith(".ipsw"):
-                QMessageBox.warning(self, "Warning!", "Your IPSW file is not a file ending in .ipsw\nThis can cause errors in the execution and it is recommended to choose a file ending in .ipsw")
-
-            args = f"sudo ./downr1n.sh --boot"
-
-            command = f"cd {self.path} && {sys.executable} {os.path.abspath(os.getcwd())}/downr1n.sh {args}"
+            command = f"{self.path}/downr1n.sh {args}"
 
             if not os.path.exists(f"{self.path}/downr1n.sh"):
                 QMessageBox.critical(self, "Error!", "dualra1n-gui was not found in current path.")
                 return
       
-            run_command(command)
+            self.command_thread.set_command(command)
+            self.command_thread.start()
 
     def IPSWPath_clicked(self):
         options = QFileDialog.Options()

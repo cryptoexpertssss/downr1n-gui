@@ -1,2 +1,6 @@
 __pycache__/
+logs/
+boot/
+ramdisk/
+work/
 .DS_Store
