@@ -6,7 +6,7 @@ A GUI Software that downgrades tethered checkm8 idevices ios 14, 15. (ready to u
 download the ipsw and put it into ipsw/ directory
 
 # command 
-sudo python3 downr1n.py
+sudo python3 downr1n-gui.py
 
 # command used for jailbreaking with Gui
 sudo python3 jailbreak-gui.py
