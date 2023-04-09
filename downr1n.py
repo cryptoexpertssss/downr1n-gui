@@ -75,16 +75,14 @@ class MainWindow(QMainWindow):
             if not ipsw.endswith(".ipsw"):
                 QMessageBox.warning(self, "Warning!", "Your IPSW file is not a file ending in .ipsw\nThis can cause errors in the execution and it is recommended to choose a file ending in .ipsw")
 
-            args = f"sudo ./downr1n.sh --downgrade 15.6"
+            args = f"sudo ./downr1n.sh --boot"
 
             command = f"cd {self.path} && {sys.executable} {os.path.abspath(os.getcwd())}/downr1n.sh {args}"
 
             if not os.path.exists(f"{self.path}/downr1n.sh"):
                 QMessageBox.critical(self, "Error!", "dualra1n-gui was not found in current path.")
                 return
-            
-            QMessageBox.critical(self, "Warning!", "After this script finishes, put your device into pwndfu with sigchecks removed again and run \"boot.sh\"")
-
+      
             run_command(command)
 
     def IPSWPath_clicked(self):
