@@ -8,6 +8,9 @@ download the ipsw and put it into ipsw/ directory
 # command 
 sudo python3 downr1n.py
 
+# command used for jailbreaking with Gui
+sudo python3 jailbreak-gui.py
+
 ---
 
 # dependencies
