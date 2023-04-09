@@ -5,7 +5,8 @@ A GUI Software that downgrades tethered checkm8 idevices ios 14, 15. (ready to u
 
 download the ipsw and put it into ipsw/ directory
 
-Example: sudo python3 downr1n.py
+# command 
+sudo python3 downr1n.py
 
 ---
 
@@ -24,7 +25,6 @@ Example: sudo python3 downr1n.py
 
 
 # help with something join to discord server https://discord.gg/GttagGBV
-# How do i jailbreak it ?
 
 
 # Credits
