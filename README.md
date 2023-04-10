@@ -1,5 +1,5 @@
 # downr1n
-A GUI Software that downgrades tethered checkm8 idevices ios 14, 15. (ready to use!)
+A GUI Software that downgrades tethered checkm8 idevices from ios 15 to 14. (ready to use!)
 
 # Usage
 
