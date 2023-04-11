@@ -3,7 +3,8 @@ A GUI Software that downgrades tethered checkm8 idevices from ios 15 to 14. (rea
 
 # Usage
 
-download the ipsw and put it into ipsw/ directory
+1) open terminal and run this command pip install pyqt5
+2) download the ipsw and put it into ipsw directory
 
 # command 
 sudo python3 downr1n-gui.py
