@@ -27,9 +27,9 @@ ios_dropdown.pack()
 def run_command():
     ios_version = ios_var.get()
     if boot_var.get() == 1:
-        command = f"sudo ./downr1n.sh --boot"
+        command = f"./downr1n.sh --boot"
     elif downgrade_var.get() == 1:
-        command = f"sudo ./downr1n.sh --downgrade {ios_version}"
+        command = f"./downr1n.sh --downgrade {ios_version}"
     os.system(command)
     result_label.config(text=f"Command '{command}' has been executed.")
 

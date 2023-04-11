@@ -20,7 +20,7 @@ version_dropdown.pack()
 # Define a function to be called when the button is clicked
 def start_jailbreak():
     version = selected_version.get()
-    command = f"sudo ./downr1n.sh --jailbreak {version}"
+    command = f"./downr1n.sh --jailbreak {version}"
     os.system(command)
 
 # Create a button
