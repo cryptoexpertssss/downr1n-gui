@@ -439,7 +439,7 @@ chmod +x "$dir"/*
 # ============
 
 echo "downr1n | Version 1.0"
-echo "Created by edwin, thanks sunst0rm, and all people creator of path file boot"
+echo "Created by edwin, thanks Aditya for Gui, sunst0rm, and all people creator of path file boot"
 echo ""
 
 parse_cmdline "$@"
