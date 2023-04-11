@@ -1,35 +1,43 @@
-import tkinter as tk
-import os
+import subprocess
+from PyQt5.QtWidgets import QApplication, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QComboBox, QWidget
 
-# Create a new tkinter window
-window = tk.Tk()
-window.title("jailbreak-gui")
-window.geometry("1280x720")
-
-# Create a label
-label = tk.Label(window, text="Select iOS version:")
-label.pack()
-
-# Create a dropdown menu
-ios_versions = ["14.1", "14.2", "14.3", "14.4", "14.5", "14.6", "14.7", "14.8", "15.0", "15.1", "15.2", "15.3", "15.4", "15.5", "15.6", "15.7"]
-selected_version = tk.StringVar(window)
-selected_version.set(ios_versions[0])
-version_dropdown = tk.OptionMenu(window, selected_version, *ios_versions)
-version_dropdown.pack()
-
-# Define a function to be called when the button is clicked
-def start_jailbreak():
-    version = selected_version.get()
-    command = f"./downr1n.sh --jailbreak {version}"
-    os.system(command)
-
-# Create a button
-start_button = tk.Button(window, text="Jailbreak!", command=start_jailbreak)
-start_button.pack()
-
-# Create a label for the message
-message = tk.Label(window, text="Made By Aditya, Uckermark, https://github.com/Aditya20110/, https://github.com/Uckermark")
-message.pack(side=tk.BOTTOM)
-
-# Start the tkinter event loop
-window.mainloop()
+class JailbreakGUI(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle('Jailbreak GUI')
+        self.setGeometry(100, 100, 1280, 720)
+        self.init_ui()
+        
+    def init_ui(self):
+        # Create the UI components
+        self.version_dropdown = QComboBox(self)
+        self.version_dropdown.addItems(['iOS 14.1', 'iOS 14.2', 'iOS 14.3', 'iOS 14.4', 'iOS 14.5', 'iOS 14.6', 'iOS 14.7', 'iOS 14.8', 'iOS 15.0', 'iOS 15.1', 'iOS 15.2', 'iOS 15.3', 'iOS 15.4', 'iOS 15.5', 'iOS 15.6', 'iOS 15.7'])
+        self.jailbreak_button = QPushButton('Jailbreak!', self)
+        self.message_label = QLabel('Made By Aditya ,Uckermark\nsome code of edwin', self)
+        
+        # Create the layout
+        vbox = QVBoxLayout()
+        vbox.addWidget(self.version_dropdown)
+        vbox.addWidget(self.jailbreak_button)
+        vbox.addStretch(1)
+        
+        hbox = QHBoxLayout()
+        hbox.addWidget(self.message_label)
+        hbox.addStretch(1)
+        
+        vbox.addLayout(hbox)
+        self.setLayout(vbox)
+        
+        # Connect the button click to the jailbreak function
+        self.jailbreak_button.clicked.connect(self.jailbreak)
+        
+    def jailbreak(self):
+        version = self.version_dropdown.currentText()
+        command = f'sudo ./downr1n.sh --jailbreak {version}'
+        subprocess.call(command, shell=True)
+        
+if __name__ == '__main__':
+    app = QApplication([])
+    gui = JailbreakGUI()
+    gui.show()
+    app.exec_()
