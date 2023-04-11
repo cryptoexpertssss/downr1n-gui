@@ -1,77 +1,84 @@
-import os
 import sys
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtWidgets import *
-
+from PyQt5.QtWidgets import QApplication, QWidget, QComboBox, QPushButton, QVBoxLayout, QHBoxLayout, QLabel, QCheckBox
+from PyQt5.QtGui import QColor
+import subprocess
 
 class Downr1nGui(QWidget):
     def __init__(self):
         super().__init__()
+        self.initUI()
+    
+    def initUI(self):
+        self.setWindowTitle('Downr1n Gui')
+        self.setGeometry(0, 0, 1280, 720)
+        self.setFixedSize(1280, 720)
         
-        # Set the window dimensions
-        self.width = 1280
-        self.height = 720
-        self.setFixedSize(self.width, self.height)
-        
-        # Set the window title
-        self.setWindowTitle("Downr1n Gui")
-                
-        # Create the Boot checkbox
+        # Checkbox for boot
         self.boot_checkbox = QCheckBox('Boot', self)
-        self.boot_checkbox.move(20, 20)
+        self.boot_checkbox.move(100, 100)
         self.boot_checkbox.stateChanged.connect(self.boot_checkbox_changed)
         
-        # Create the Downgrade checkbox
+        # Checkbox for downgrade
         self.downgrade_checkbox = QCheckBox('Downgrade', self)
-        self.downgrade_checkbox.move(20, 50)
+        self.downgrade_checkbox.move(100, 150)
         self.downgrade_checkbox.stateChanged.connect(self.downgrade_checkbox_changed)
         
-        # Create the message label
-        self.message_label = QLabel("Made By Aditya ,Uckermark\nhttps://github.com/Aditya20110/\nhttps://github.com/Uckermark", self)
-        self.message_label.move(20, 90)
+        # Dropdown menu for iOS versions
+        self.version_label = QLabel('Select iOS version:', self)
+        self.version_label.move(100, 200)
         
-        # Hide the dropdown menu when boot checkbox is selected
         self.version_dropdown = QComboBox(self)
-        self.version_dropdown.addItems(['14.1', '14.2', '14.3', '14.4', '14.5', '14.6', '14.7', '14.8', '15.0', '15.1', '15.2', '15.3', '15.4', '15.5', '15.6', '15.7'])
-        self.version_dropdown.move(150, 20)
-        self.version_dropdown.hide()
+        self.version_dropdown.move(250, 200)
+        self.version_dropdown.addItem('14.1')
+        self.version_dropdown.addItem('14.2')
+        self.version_dropdown.addItem('14.3')
+        self.version_dropdown.addItem('14.4')
+        self.version_dropdown.addItem('14.5')
+        self.version_dropdown.addItem('14.6')
+        self.version_dropdown.addItem('14.7')
+        self.version_dropdown.addItem('14.8')
+        self.version_dropdown.addItem('15.0')
+        self.version_dropdown.addItem('15.1')
+        self.version_dropdown.addItem('15.2')
+        self.version_dropdown.addItem('15.3')
+        self.version_dropdown.addItem('15.4')
+        self.version_dropdown.addItem('15.5')
+        self.version_dropdown.addItem('15.6')
+        self.version_dropdown.addItem('15.7')
         
-        # Create the Execute button
+        # Default to 14.8
+        self.version_dropdown.setCurrentText('14.8')
+        
+        # Message labels
+        self.message_label = QLabel('Made By Aditya,Uckermark\nSome code of Edwin', self)
+        self.message_label.move(100, 500)
+        
+        # Execute button
         self.execute_button = QPushButton('Execute', self)
-        self.execute_button.move(150, 50)
+        self.execute_button.move(100, 400)
         self.execute_button.clicked.connect(self.execute_button_clicked)
         
-        # Initialize the command variable
-        self.command = ""
+        self.show()
     
     def boot_checkbox_changed(self):
         if self.boot_checkbox.isChecked():
+            self.version_label.hide()
             self.version_dropdown.hide()
-        else:
-            self.version_dropdown.show()
     
     def downgrade_checkbox_changed(self):
         if self.downgrade_checkbox.isChecked():
-            self.command = "sudo ./downr1n.sh --downgrade"
-        else:
-            self.command = ""
+            self.version_label.show()
+            self.version_dropdown.show()
     
     def execute_button_clicked(self):
         if self.boot_checkbox.isChecked():
-            command = "sudo ./downr1n.sh --boot"
+            subprocess.run(['sudo', './downr1n.sh', '--boot'])
         elif self.downgrade_checkbox.isChecked():
-            command = self.command + " " + str(self.version_dropdown.currentText())
-        
-        if command:
-            os.system(command)
-            self.close()
-    
+            version = self.version_dropdown.currentText()
+            subprocess.run(['sudo', './downr1n.sh', '--downgrade', version])
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    #print "made by Aditya,Uckermark"
-    #print "some code of edwin"
-    gui = Downr1nGui()
-    gui.show()
+    ex = Downr1nGui()
     sys.exit(app.exec_())
+
