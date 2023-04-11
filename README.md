@@ -32,7 +32,9 @@ sudo python3 jailbreak-gui.py
 
 # Credits
 
-# with love Aditya,Uckermark :)
+# with love Aditya,Edwin:)
+
+# welcome Nebula!
 
 <details><summary>thanks to</summary>
 <p>
