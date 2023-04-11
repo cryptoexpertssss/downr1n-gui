@@ -29,6 +29,8 @@ sudo python3 jailbreak-gui.py
 
 # help with something join to discord server https://discord.gg/AjEHs5ug
 
+# Mac os support will be added later,working on it.
+
 
 # Credits
 
